@@ -1,0 +1,41 @@
+{
+  "name": "vue-teleporter",
+  "version": "0.0.1",
+  "description": "函数式传送/渲染/挂载 Vue2/3 组件, 减免对传统模态框挂载点、可见性/visible 和数据流的维护负担（关注点分离）。",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "peerDependencies": {
+    "vue": "^2.0 || ^3.0"
+  },
+  "files": [
+    "package.json",
+    "dist",
+    "README.md",
+    "README.zh_CN.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "publish": "npm publish"
+  },
+  "author": {
+    "name": "memo",
+    "email": "i@memo.cool"
+  },
+  "license": "MIT",
+  "keywords": [
+    "vue",
+    "functional",
+    "teleport"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/memo-cn/vue-teleporter"
+  },
+  "bugs": {
+    "email": "i@memo.cool",
+    "url": "https://github.com/memo-cn/vue-teleporter/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -3,34 +3,36 @@ vue-teleporter
 
 [简体中文](README.zh_CN.md) | [English](README.md)
 
-vue-teleporter provides the `teleport` function to teleport/render/mount Vue2/3 components functionally,
+vue-teleporter 提供 `teleport` 函数, 实现函数式传送/渲染/挂载 Vue2/3 组件,
 
-It reduces the maintenance burden (separation of concerns) of the mount point, visibility and data flow of the traditional modal box.
+减免对传统模态框挂载点、可见性/visible 和数据流的维护负担（关注点分离）。
 
-Quickly understand
+快速理解
 -------
 
-- `teleport` is consistent with the input parameters of `h`, `teleport` can be understood as the alias of `h`;
+- `teleport` 与 `h` 的入参一致, 可将 `teleport` 理解为 `h` 的别名;
 
 
-- `h` returns the `VNode` object, and `teleport` directly renders the teleported components to a container;
-- Emitting a `return` event on the teleported component will cause it to be unmounted;
-- The defined `return` event listener will be called when the teleported component is unmounted.
+- `h` 返回 `VNode` 对象, `teleport` 则直接将被传送的组件渲染至容器内;
+- 在传送的组件发出 `return` 事件将导致其被卸载;
+- 定义的 `return` 事件监听器在被传送的组件被卸载时触发。
 
-Preparatory knowledge
+预备知识
 -------
 
-Learn about [Vue2 rendering function API](https://v2.vuejs.org/v2/guide/render-function.html) or [Vue3 rendering function API](https://vuejs.org/api/render-function.html).
+对 [Vue2 渲染函数 API](https://v2.cn.vuejs.org/v2/guide/render-function.html) 或 [Vue3 渲染函数 API](https://cn.vuejs.org/api/render-function.html) 有一定了解。
 
-Get started quickly
+快速上手
 -------
-install:
+
+安装:
 
 ```bash
 npm i vue-teleporter
 ```
 
-In App.vue or other suitable place to insert the Teleported Component Container:
+在 App.vue 或其它合适位置种下容器组件:
+
 ```vue
 <!-- Vue2/Vue3 -->
 <template>
@@ -62,7 +64,8 @@ export default {
 </script>
 ```
 
-use the `teleport` method to teleport/render/mount a component (to the Teleported Component Container):
+调用 `teleport` 方法传送/渲染/挂载组件(至刚刚种下的容器内):
+
 ```typescript
 import MyConfirm from '... MyConfirm.vue';
 import {teleport} from 'vue-teleporter';
@@ -94,7 +97,8 @@ async function my_Vue3_confirm(message): Promise<boolean> {
 }
 ```
 
-Emitting a `return` event on the teleported MyConfirm.vue component:
+在被传送的 MyConfirm.vue 组件内部发出 return 事件:
+
 ```vue
 
 <template>
@@ -106,8 +110,8 @@ Emitting a `return` event on the teleported MyConfirm.vue component:
       {{ message }}
     </p>
     <div>
-      <button @click="$emit('return', false);">Cancel</button>
-      <button @click="$emit('return', true);">Ok</button>
+      <button @click="$emit('return', false);">取消</button>
+      <button @click="$emit('return', true);">确定</button>
     </div>
   </div>
 </template>
@@ -118,10 +122,10 @@ export default {
 </script>
 ```
 
-Best Practices
+最佳实践
 -------
 
-- `teleport` function returns a new function, which can be called to unmount the teleported component:
+- `teleport` 函数返回一个新函数, 可调用它以主动卸载被传送的组件:
 
 ```typescript
 async function my_Vue3_confirm(message): Promise<boolean> {
@@ -133,16 +137,17 @@ async function my_Vue3_confirm(message): Promise<boolean> {
             }
         });
 
-        // Manually unmount the teleported component without operation within 5 seconds.
+        // 5 秒内不操作自动卸载传送的组件
         setTimeout(function () {
-            manualUnmount(false); // It is deemed to be canceled.
+            manualUnmount(false); // 视为取消。
         }, 5_000);
 
     });
 }
 ```
 
-- When the route changes, call the `unmountAllTeleportedComponents` function to unmount all teleported components:
+- 路由发生改变时调用 `unmountAllTeleportedComponents` 函数卸载所有被传送的组件:
+
 ```javascript
 import {unmountAllTeleportedComponents} from 'vue-teleporter';
 
@@ -154,9 +159,9 @@ router.beforeEach(function (to, from, next) {
 });
 ```
 
-In this case, when the return event listener is called back, there is no input parameter.
+这种情况下 return 事件监听器被回调时无入参。
 
-- Reuse third-party modal box components:
+- 复用第三方模态框组件:
 
 ```vue
 
@@ -166,8 +171,8 @@ In this case, when the return event listener is called back, there is no input p
       {{ message }}
     </p>
     <div>
-      <button @click="$emit('return', false);">Cancel</button>
-      <button @click="$emit('return', true);">Ok</button>
+      <button @click="$emit('return', false);">取消</button>
+      <button @click="$emit('return', true);">确定</button>
     </div>
   </el-dialog>
 </template>
@@ -177,5 +182,5 @@ export default {
 }
 </script>
 ```
-Now we don't need to pay attention to the visible attribute.
+现在不需要再关注 visible 属性了。
 
