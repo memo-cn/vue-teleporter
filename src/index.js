@@ -5,10 +5,6 @@ let {nextTick, h, version, set, del} = Vue;
 
 const isVue2 = version.startsWith('2.');
 
-export {
-    TeleportedComponentContainer, teleport, unmountAllTeleportedComponents
-}
-
 if (!isVue2) { // vue3 用的 Proxy 不需要 set、del 了, 直接进行原生操作。
     set = function (object, key, value) {
         object[key] = value;
@@ -68,14 +64,16 @@ async function unmountAllTeleportedComponents() {
     }
 }
 
+const tip$1 = navigator.language.toLowerCase() === 'zh-cn' ? '容器组件 <TeleportedComponentContainer> 未就绪, 无法传送组件; 请确保容器组件已被种到合适的位置且处于激活状态。' : 'The <TeleportedComponentContainer> is not ready to teleport components; ' + 'Please ensure that it has been inserted to the appropriate location and is active.';
+
 function teleport() {
 
     if (!keys) {
-        throw '容器组件 <TeleportedComponentContainer> 未就绪, 无法传送组件; 请确保容器组件已被种到合适的位置且处于激活状态。';
+        throw tip$1;
     }
 
     // 随机生成一个 key
-    const key = 'c' + Number.parseInt((Math.random() * 10e16)).toString(36);
+    const key = 'c' + Number.parseInt(String(Math.random() * 10e16)).toString(36);
 
     const data = arguments[1];
 
@@ -205,4 +203,8 @@ function getVNodeWithAttributePenetration(key, args, h) {
 
     return key2VNode[key] = h.apply(null, args);
 
+}
+
+export {
+    TeleportedComponentContainer, teleport, unmountAllTeleportedComponents
 }

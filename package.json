@@ -1,17 +1,18 @@
 {
   "name": "vue-teleporter",
-  "version": "0.0.1",
-  "description": "函数式传送/渲染/挂载 Vue2/3 组件, 减免对传统模态框挂载点、可见性/visible 和数据流的维护负担（关注点分离）。",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "version": "1.0.0",
+  "description": "一种 Vue 组件函数式渲染方案，允许开发者在调用/使用阶段，函数式地传送/渲染/挂载 Vue 组件。A functional rendering scheme for Vue components, allowing developers to teleport/render/mount Vue components in a functional way during the call/use phase.",
+  "main": "src/index.js",
+  "types": "src/index.d.ts",
   "peerDependencies": {
     "vue": "^2.0 || ^3.0"
   },
   "files": [
     "package.json",
-    "dist",
+    "src",
     "README.md",
-    "README.zh_CN.md",
+    "README.en-US.md",
+    "CHANGELOG",
     "LICENSE"
   ],
   "scripts": {
