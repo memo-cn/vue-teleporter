@@ -1,4 +1,4 @@
-vue-teleporter <img src="https://img.shields.io/npm/v/vue-teleporter.svg" /> <img src="https://packagephobia.now.sh/badge?p=vue-teleporter" />
+vue-teleporter <a href="https://github.com/memo-cn/vue-teleporter/blob/main/README.en-US.md"><img src="https://img.shields.io/npm/v/vue-teleporter.svg" /></a> <a href="https://github.com/memo-cn/vue-teleporter/blob/main/README.en-US.md"><img src="https://packagephobia.now.sh/badge?p=vue-teleporter" /></a>
 ========
 
 [简体中文](README.md) | [English](README.en-US.md)
@@ -145,6 +145,8 @@ export default {
 }
 </script>
 ```
+
+After the event listener in my_Vue_confirm function is triggered (gets the business result), you can continue to execute the subsequent logic. When the teleported component emits a return event, it will be unmounted automatically by vue-teleporter.
 
 Best Practices
 -------
