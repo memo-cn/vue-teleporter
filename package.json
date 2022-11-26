@@ -1,18 +1,19 @@
 {
   "name": "vue-teleporter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "一种 Vue 组件函数式渲染方案，允许开发者在调用/使用阶段，函数式地传送/渲染/挂载 Vue 组件。A functional rendering scheme for Vue components, allowing developers to teleport/render/mount Vue components in a functional way during the call/use phase.",
+  "homepage": "https://github.com/memo-cn/vue-teleporter#readme",
   "main": "src/index.js",
   "types": "src/index.d.ts",
   "peerDependencies": {
     "vue": "^2.0 || ^3.0"
   },
   "files": [
-    "package.json",
     "src",
-    "README.md",
+    "package.json",
+    "CHANGELOG.md",
     "README.en-US.md",
-    "CHANGELOG",
+    "README.md",
     "LICENSE"
   ],
   "scripts": {
@@ -37,6 +38,7 @@
     "url": "https://github.com/memo-cn/vue-teleporter/issues"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }

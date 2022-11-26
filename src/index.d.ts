@@ -4,7 +4,7 @@ import {DefineComponent, h} from 'vue';
 export const TeleportedComponentContainer: DefineComponent;
 
 // 卸载所有被传送的组件
-export async function unmountAllTeleportedComponents(): Promise<void>;
+export function unmountAllTeleportedComponents(): Promise<void>;
 
 /**
  * @desc teleport/传送 一个组件, 渲染到 TeleportedComponentContainer/容器 被种下的地方。

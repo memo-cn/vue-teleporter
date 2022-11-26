@@ -1,4 +1,4 @@
-vue-teleporter <img src="https://img.shields.io/npm/v/vue-teleporter.svg" /> <img src="https://packagephobia.now.sh/badge?p=vue-teleporter" />
+vue-teleporter <a href="https://github.com/memo-cn/vue-teleporter/blob/main/README.md"><img src="https://img.shields.io/npm/v/vue-teleporter.svg" /></a> <a href="https://github.com/memo-cn/vue-teleporter/blob/main/README.md"><img src="https://packagephobia.now.sh/badge?p=vue-teleporter" /></a>
 ========
 
 [简体中文](README.md) | [English](README.en-US.md)
@@ -13,6 +13,7 @@ vue-teleporter 是一种 Vue 组件函数式渲染方案，允许开发者在调
 接口
 -------
 包 vue-teleporter 暴露了 1 个容器组件和组件传送、批量卸载 2 个函数:
+
 ![](https://raw.githubusercontent.com/memo-cn/vue-teleporter/main/resources/figure.1.interface.en-US.svg)
 
 - `teleport` 函数与 `h` 函数的入参一致, 可将 `teleport` 理解为 `h` 的别名;
@@ -132,6 +133,8 @@ export default {
 }
 </script>
 ```
+
+my_Vue_confirm 函数里的事件监听器被触发（拿到业务结果）后继续执行后续逻辑即可。vue-teleporter 旁听到弹窗组件发出 return 事件时会自动对其进行卸载。
 
 最佳实践
 -------

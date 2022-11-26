@@ -5,13 +5,14 @@ let {nextTick, h, version, set, del} = Vue;
 
 const isVue2 = version.startsWith('2.');
 
-if (!isVue2) { // vue3 用的 Proxy 不需要 set、del 了, 直接进行原生操作。
+if (!isVue2) {
+    // vue3 用的 Proxy 不需要 set、del 了, 直接进行原生操作。
     set = function (object, key, value) {
         object[key] = value;
-    }
+    };
     del = function (object, key) {
         delete object[key];
-    }
+    };
 }
 
 /* 每次被传送的组件都会被分配一个唯一 key, 作为下面这两个映射对象的 key, 也作为虚拟节点的 key 。*/
@@ -64,10 +65,13 @@ async function unmountAllTeleportedComponents() {
     }
 }
 
-const tip$1 = navigator.language.toLowerCase() === 'zh-cn' ? '容器组件 <TeleportedComponentContainer> 未就绪, 无法传送组件; 请确保容器组件已被种到合适的位置且处于激活状态。' : 'The <TeleportedComponentContainer> is not ready to teleport components; ' + 'Please ensure that it has been inserted to the appropriate location and is active.';
+const tip$1 =
+    navigator.language.toLowerCase() === 'zh-cn'
+        ? '容器组件 <TeleportedComponentContainer> 未就绪, 无法传送组件; 请确保容器组件已被种到合适的位置且处于激活状态。'
+        : 'The <TeleportedComponentContainer> is not ready to teleport components; ' +
+          'Please ensure that it has been inserted to the appropriate location and is active.';
 
 function teleport() {
-
     if (!keys) {
         throw tip$1;
     }
@@ -101,16 +105,19 @@ function teleport() {
 
 async function onContainerUnmount() {
     await unmountAllTeleportedComponents();
-    keys = null;
+    if (keys === this.keys) {
+        keys = null;
+    } else {
+        // keys 可能已经被另一个容器实例覆盖了, 现在无需再置空。
+    }
 }
 
 // 容器组件
 const TeleportedComponentContainer = {
-
     data() {
         return {
-            keys: {}, arr: []
-        }
+            keys: {},
+        };
     },
 
     beforeDestroy: onContainerUnmount,
@@ -122,7 +129,6 @@ const TeleportedComponentContainer = {
     },
 
     render() {
-
         // vue2 会传进来 createElement, vue3 则不是, 而是 props 。
         const h1 = isVue2 ? arguments[0] : h;
 
@@ -141,7 +147,6 @@ const TeleportedComponentContainer = {
 
 // 获取被传送组件对应的 VNode
 function getVNodeWithAttributePenetration(key, args, h) {
-
     if (key2VNode[key]) {
         return key2VNode[key];
     }
@@ -201,10 +206,7 @@ function getVNodeWithAttributePenetration(key, args, h) {
     // 设置 key
     Object.assign(args[1], {key});
 
-    return key2VNode[key] = h.apply(null, args);
-
+    return (key2VNode[key] = h.apply(null, args));
 }
 
-export {
-    TeleportedComponentContainer, teleport, unmountAllTeleportedComponents
-}
+export {TeleportedComponentContainer, teleport, unmountAllTeleportedComponents};
